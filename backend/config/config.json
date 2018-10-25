@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "admin",
+    "database": "pruebatecnica",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

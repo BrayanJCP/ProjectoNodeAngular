@@ -1,0 +1,26 @@
+<div class="content-home">
+  <nav>
+    <p>Bienvenido <b>{{user.name}}</b> </p>
+  </nav>
+  <main>
+    <div>
+      <form action="" (ngSubmit)="Submit()">
+        <input type="text" [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}" placeholder="Nombre" autocomplete="name-product">
+        <input type="text" [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" placeholder="Descripción" autocomplete="description-product">
+        <input type="text" [(ngModel)]="product.cost" [ngModelOptions]="{standalone: true}" placeholder="Valor" autocomplete="cost-product">
+        <button>Crear</button>
+      </form>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let product of listProducts;let i=index">
+          <div>
+            <h4>{{product.name}}</h4>
+            <p>{{product.description}}</p>
+            <small>{{product.cost}}</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+</div>

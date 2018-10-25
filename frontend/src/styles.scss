@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: black;
+}
+input{
+    width: 100%;
+    border:0;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    color:white;
+    margin: 20px;
+    font-size: 20px;
+    &:focus{
+        border-bottom: 2px solid white; 
+        outline: none;
+    }
+}
+button{
+    width: 100%;
+    background-color: white;
+    border: 1px solid transparent;
+    padding: 10px 5px;
+    border-radius: 20px;
+    color: black;
+    font-size: 20px;
+}
+.content-login{
+    width:100%;
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 300px;
+    }
+}
+.content-home{
+    color: white;
+    nav p{
+        text-align: right;
+        font-size: 18px;
+    }
+    form{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        min-width: 300px;
+        @media screen and (max-width:992px) {
+            flex-direction: column;
+        }
+    }
+}
+ul{
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    li{
+        list-style: none;
+        width: 33%;
+        @media screen and (max-width:425px) {
+            width: 100%;
+            div{
+                border-right: none;
+            }
+        }
+        div{
+            border-bottom: 1px solid white;
+            border-right: 1px solid white;
+            padding: 20px;
+            h4,p,small{ padding: 0; margin: 0;}
+            h4{
+                font-size: 20px;
+            }
+        }
+    }
+}

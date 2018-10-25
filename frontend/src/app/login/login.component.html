@@ -1,0 +1,7 @@
+<div class="content-login">
+  <form action="" (ngSubmit)="Submit()">
+    <input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}" placeholder="UserName" autocomplete="username">
+    <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" placeholder="Contraseña" autocomplete="current-password">
+    <button>Enviar</button>
+  </form>
+</div>
