@@ -15,20 +15,10 @@ export class MasterService{
     }
     post(uri,body):Observable<any>{
         let sub=this.http.post(uri,body,this.httpOptions);
-        sub.subscribe(res=>{
-        },error=>{
-            //Control de errores
-            console.log(error);
-        });
         return sub;
     }
     get(uri):Observable<any>{
         let sub=this.http.get(uri,this.httpOptions);
-        sub.subscribe(res=>{
-        },error=>{
-            //Control de errores
-            console.log(error);
-        });
         return sub;
     }
 }

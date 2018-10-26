@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Headers","Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     next();
 });
 //Conexion base de datos
@@ -37,9 +37,9 @@ app.post('/createUser', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, 8);
     models.User.create(req.body).then(() => {
         User.findOrCreate({ where: { name: req.body.name } });
-        res.send('Usuario Creado');
-    }).catch(()=>{
-        res.send("Usuario no creado");
+        res.send({ message: 'Usuario Creado' });
+    }).catch(() => {
+        res.send({ message: 'Usuario no Creado' });
     });
 });
 app.post('/login', (req, res) => {
@@ -54,31 +54,35 @@ app.post('/login', (req, res) => {
                     });
                     res.send({ token: token });
                 } else {
-                    res.send("Usuario no creado");
+                    res.send({ message: 'Usuario no Creado' });
                 }
             });
         } else {
-            res.send("Usuario no creado");
+            res.send({ message: 'Usuario no Creado' });
         }
-    }).catch(()=>{
-        res.send("Usuario no creado");
+    }).catch(() => {
+        res.send({ message: 'Usuario no Creado' });
     });
 });
-app.post('/createProduct', (req,res) => {
+app.post('/createProduct', (req, res) => {
     var token = req.headers['authorization'];
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-    models.Product.findOrCreate({where:req.body}).then((res) => {
-        res.send('Producto Creado');
-    }).catch(()=>{
-        res.send("Producto no creado");
+    models.Product.create(req.body).then((data) => {
+        res.send({ message: 'Producto Creado' });
     });
 });
-app.get('/getProducts', (req,res) => {
+app.get('/getProducts', (req, res) => {
     var token = req.headers['authorization'];
+    var ressend = res;
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     models.Product.all().then(items => {
-        res.send({listProducts:items});
-    }).catch(()=>{
-        res.send("Usuario no creado");
+        ressend.send({
+            listProducts: items.sort((a, b) => {
+                return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
+            }
+            )
+        });
+    }).catch(() => {
+        res.send({ message: 'Producto no Creado' });
     });
 });

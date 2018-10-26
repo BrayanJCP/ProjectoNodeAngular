@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
       this.getProducts();
     }, error => {
       console.log(error);
+      this.product=new Product();
     });
   }
   getProducts(){
